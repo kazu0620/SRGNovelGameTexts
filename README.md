@@ -11,7 +11,7 @@ SRGNovelGameTexts can show text view like a novel game texts, its easily and sim
     novelGameText.textColor = [UIColor blackColor];
     [self.view addSubview:novelGameText];
     
-    // set display
+    // set texts
     [novelGameText setText:@"Hello Novel Texts View"];
     
     // start effect
