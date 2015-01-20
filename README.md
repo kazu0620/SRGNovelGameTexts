@@ -12,4 +12,4 @@ pod 'SRGNovelGameTexts', '~> 0.0.1'
 
 or add manually: 
 
-Add `SRGNovelGameTexts` & `SRGNovelGameTexts` to your project.
+Add `SRGNovelGameTexts.h` & `SRGNovelGameTexts.m` to your project.
