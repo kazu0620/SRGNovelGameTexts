@@ -3,7 +3,7 @@ SRGNovelGameTexts can show text view like a novel game texts, its easily and sim
 ##Screenshot
 ![](https://dl.dropboxusercontent.com/u/461628/SRGNovelGameTextsPreview.gif)
 ##Examples
----------
+
 ```objc
     // initialize novel text view
     SRGNovelGameTexts *novelGameText = [SRGNovelGameTexts new];
