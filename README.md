@@ -12,4 +12,4 @@ pod 'SRGNovelGameTexts', '~> 0.0.1'
 
 or add manually: 
 
-Add `UIView+Toast.h` & `UIView+Toast.m` to your project.
+Add `SRGNovelGameTexts` & `SRGNovelGameTexts` to your project.
