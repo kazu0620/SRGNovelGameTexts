@@ -44,7 +44,7 @@
         [wSelf onAllTextDisplayed];
     };
     
-    [novelGameText setText:@"いろはにほへとちりぬるをわかよたれそつねならむうゐのおくやまけふこえてあさきゆめみしゑひもせすん"];
+    [novelGameText setDisplayText:@"いろはにほへとちりぬるをわかよたれそつねならむうゐのおくやまけふこえてあさきゆめみしゑひもせすん"];
     [novelGameText startDisplayingText];
 }
 

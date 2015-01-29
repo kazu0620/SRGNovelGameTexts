@@ -10,7 +10,7 @@
 
 @interface SRGNovelGameTexts : UIView
 
-typedef void (^DisplayOneByOneTextViewEvent)();
+typedef void (^SRGNovelGameTextsEvent)();
 
 @property UIColor *textColor;
 @property UIFont *font;
@@ -21,9 +21,9 @@ typedef void (^DisplayOneByOneTextViewEvent)();
 
 @property BOOL isTextDisplayingCompleted;
 
-@property (nonatomic,copy) DisplayOneByOneTextViewEvent onAllTextDisplayed;
+@property (nonatomic,copy) SRGNovelGameTextsEvent onAllTextDisplayed;
 
-- (void) setText:(NSString *)text;
+- (void) setDisplayText:(NSString *)text;
 - (void) startDisplayingText;
 - (void) displayAllText;
 - (void) cleanup;
