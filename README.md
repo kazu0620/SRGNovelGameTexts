@@ -1,5 +1,5 @@
 # SRGNovelGameTexts
-SRGNovelGameTexts can show text view like a novel game texts, its easily and simple.
+SRGNovelGameTexts can show text view like a novel game by easily and simple interface.
 ##Screenshot
 ![](https://dl.dropboxusercontent.com/u/461628/SRGNovelGameTextsPreview.gif)
 ##Examples
