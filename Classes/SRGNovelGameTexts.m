@@ -9,14 +9,14 @@
 #import "SRGNovelGameTexts.h"
 
 @implementation SRGNovelGameTexts {
-    NSString *displayText;
-    NSTimer *displayTextScheduler;
+    NSString *_displayText;
+    NSTimer *_displayTextScheduler;
     
-    NSInteger textCountInCurrentLine;
-    NSInteger lineCount;
-    NSMutableArray *lineBreakPoint;
+    NSInteger _textCountInCurrentLine;
+    NSInteger _lineCount;
+    NSMutableArray *_lineBreakPoint;
     
-    NSMutableArray *stringLabels;
+    NSMutableArray *_stringLabels;
 }
 
 #pragma mark - Initialize
@@ -29,7 +29,7 @@
         _stringDisplaySpeed = 0.1;
         _stringFadeInSpeed  = 0.1;
         
-        stringLabels = @[].mutableCopy;
+        _stringLabels = @[].mutableCopy;
         _isTextDisplayingCompleted = NO;
     }
     return self;
@@ -40,14 +40,14 @@
     NSAssert(text != nil, @"text is EMPTY");
     _isTextDisplayingCompleted = NO;
     
-    lineBreakPoint = @[].mutableCopy;
-    displayText = [self parseLineBreakMark:text];
+    _lineBreakPoint = @[].mutableCopy;
+    _displayText = [self parseLineBreakMark:text];
     
     [self createStringLabels];
 }
 
 - (void) startDisplayingText {
-    displayTextScheduler = [NSTimer
+    _displayTextScheduler = [NSTimer
         scheduledTimerWithTimeInterval:_stringDisplaySpeed
         target:self
         selector:@selector(displayStringNextOne)
@@ -57,7 +57,7 @@
 }
 
 - (void) displayAllText {
-    for( UILabel *string in stringLabels ){
+    for( UILabel *string in _stringLabels ){
         string.hidden = NO;
     }
     [self onAllStringDisplayed];
@@ -67,13 +67,13 @@
     for( UIView *view in self.subviews ){
         [view removeFromSuperview];
     }
-    [displayTextScheduler invalidate];
+    [_displayTextScheduler invalidate];
     
-    displayTextScheduler = nil;
-    displayText = nil;
-    stringLabels = @[].mutableCopy;
-    lineCount = 0;
-    textCountInCurrentLine = 0;
+    _displayTextScheduler = nil;
+    _displayText = nil;
+    _stringLabels = @[].mutableCopy;
+    _lineCount = 0;
+    _textCountInCurrentLine = 0;
 }
 
 #pragma mark - Create Lable Parts
@@ -93,8 +93,8 @@
     [self setPositionWithLabel:string];
     
     [self addSubview:string];
-    [stringLabels addObject:string];
-    textCountInCurrentLine++;
+    [_stringLabels addObject:string];
+    _textCountInCurrentLine++;
 }
 
 - (UILabel *) labelWithString:(NSString *)string {
@@ -107,17 +107,17 @@
 }
 
 - (BOOL) isStringLabelCreatingCompleted {
-    return ( stringLabels.count == displayText.length );
+    return ( _stringLabels.count == _displayText.length );
 }
 
 #pragma mark - Adjust label position
 - (void) setPositionWithLabel:(UILabel *)label{
-    UILabel *preAdded = stringLabels.lastObject;
+    UILabel *preAdded = _stringLabels.lastObject;
     
     if( !preAdded ){
         [self setXPosWithUIVIew:label x:0];
         [self setYPosWithUIVIew:label y:0];
-        lineCount = 1;
+        _lineCount = 1;
         return;
     }
     
@@ -126,11 +126,11 @@
     
     if( isNeedLineBreak ){
         [self setYPosWithUIVIew:label y:
-            (label.frame.size.height + _lineSpacing) *  lineCount
+            (label.frame.size.height + _lineSpacing) *  _lineCount
          ];
         [self setXPosWithUIVIew:label x:0];
-        lineCount++;
-        textCountInCurrentLine = 0;
+        _lineCount++;
+        _textCountInCurrentLine = 0;
         return;
     }
     
@@ -144,7 +144,7 @@
     float maxX = 0;
     float maxY = 0;
     
-    for( UILabel *label in stringLabels ){
+    for( UILabel *label in _stringLabels ){
         CGPoint frameOrigin = label.frame.origin;
         CGSize  frameSize   = label.frame.size;
         float labelsMaxX = frameOrigin.x + frameSize.width;
@@ -167,7 +167,7 @@
 
 #pragma mark - Display label parts
 - (void) displayStringNextOne {
-    for( UILabel *string in stringLabels ){
+    for( UILabel *string in _stringLabels ){
         if( string.hidden ){
             string.alpha  = 0;
             string.hidden = NO;
@@ -178,7 +178,7 @@
             return;
         }
     }
-    [displayTextScheduler invalidate];
+    [_displayTextScheduler invalidate];
     [self onAllStringDisplayed];
 }
 
@@ -186,8 +186,8 @@
     if( [self isStringLabelCreatingCompleted] ){
         return nil;
     }
-    return [displayText substringWithRange:
-            NSMakeRange(stringLabels.count, 1)
+    return [_displayText substringWithRange:
+            NSMakeRange(_stringLabels.count, 1)
             ];
 }
 
@@ -203,7 +203,7 @@
     NSMutableString *mutableText = text.mutableCopy;
     NSRange range = [mutableText rangeOfString:@"\n"];
     if( range.location != NSNotFound ){
-        [lineBreakPoint addObject:@(range.location)];
+        [_lineBreakPoint addObject:@(range.location)];
         [mutableText deleteCharactersInRange:range];
         mutableText = [self parseLineBreakMark:
                        mutableText
