@@ -12,7 +12,7 @@ SRGNovelGameTexts can show text view like a novel game texts, its easily and sim
     [self.view addSubview:novelGameText];
     
     // set texts
-    [novelGameText setText:@"Hello Novel Texts View"];
+    [novelGameText setDisplayText:@"Hello Novel Texts View"];
     
     // start effect
     [novelGameText startDisplayingText];
